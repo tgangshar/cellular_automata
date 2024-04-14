@@ -10,7 +10,7 @@ My favorite rules:
   - 110 (Textile Cone Snail Shell)
 
 ---
-
+### Works Cited
 Based off of Wolfram's Elementary Cellular Automata
   - https://mathworld.wolfram.com/ElementaryCellularAutomaton.html
 
