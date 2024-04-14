@@ -1,10 +1,10 @@
-let cells = []
-let w = 2;
+let cells = [];
+let w = 4;
 let y = 0;
 
 function setup() {
   // We want an odd # of cells.
-  createCanvas(700, 410);
+  createCanvas(710, 1800);
   background(220);
   let total = width / w;
   for (let i = 0; i < total; i++) {
@@ -27,20 +27,10 @@ function draw() {
   
   let nextCells = [];
   for (let i = 0; i < cells.length; i++) {
-    let left, right;
+    // Wrap-around by modding & adding size of array
+    let left = cells[(i - 1 + cells.length) % cells.length];
+    let right = cells[(i + 1 + cells.length) % cells.length];
     let state = cells[i]
-    
-    // Wrap-Around logic.
-    if (i != 0) {
-      left = cells[i - 1];
-    } else {
-      left = cells[cells.length - 1];
-    }
-    if (i != cells.length - 1) {
-      right = cells[i + 1];
-    } else {
-      right = cells[0];
-    }
   
     let newState = calculateState(left, state, right);
     nextCells[i] = newState;
@@ -49,14 +39,17 @@ function draw() {
   cells = nextCells;
 }
 
-// Wolfram ruleset. Rule 182. Sierpinski Fractal Triangle
+function chooseRuleSet(n) {
+  return parseInt(n, 10).toString(2).padStart(8, "0");
+}
+
 function calculateState(a, b, c) {
-  if (a == 1 && b == 1 && c == 1) return 1;
-  if (a == 1 && b == 1 && c == 0) return 0;
-  if (a == 1 && b == 0 && c == 1) return 1;
-  if (a == 1 && b == 0 && c == 0) return 1;
-  if (a == 0 && b == 1 && c == 1) return 0;
-  if (a == 0 && b == 1 && c == 0) return 1;
-  if (a == 0 && b == 0 && c == 1) return 1;
-  if (a == 0 && b == 0 && c == 0) return 0;
+  // Sierpinski Fractal Triangle. Rule 182
+  // let ruleSet = chooseRuleSet(182)
+  let ruleSet = chooseRuleSet(110);
+
+  let neighborhood = '' + a + b + c;
+  // Subtract from 7 so '111' is the first in array, b '000' is the last.
+  let value = 7 - parseInt(neighborhood, 2);
+  return ruleSet[value]
 }
