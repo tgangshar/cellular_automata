@@ -1,14 +1,20 @@
 let cells = [];
 // This is our "window" of cells.
 let history = [];
+let ruleSet;
 let w = 4;
+let ruleCollection = [1, 9, 30, 45, 58, 60, 69, 105, 110, 129, 169, 182, 195, 219];
 
-let ruleCollection = [1, 9, 30, 45, 58, 60, 69, 105, 110, 129, 169, 182, 195, 219]
+
+function chooseRuleSet(n) {
+  return parseInt(n, 10).toString(2).padStart(8, "0");
+}
 
 function setup() {
   // We want an odd # of cells.
   createCanvas(710, 500);
   background(220);
+  ruleSet = chooseRuleSet(random(ruleCollection))
   let total = width / w;
   for (let i = 0; i < total; i++) {
     cells[i] = 0
@@ -19,7 +25,10 @@ function setup() {
 function draw() {
   history.push(cells);
 
-  // Rule-change logic here.
+  // Rule-change logic. After ~100 generations.
+  if (random(1) < 0.01) {
+    ruleSet = chooseRuleSet(random(ruleCollection));
+  }
 
   // Infinite Scroll logic.
   let rows = height/w;
@@ -59,16 +68,7 @@ function draw() {
   cells = nextCells;
 }
 
-function chooseRuleSet(n) {
-  return parseInt(n, 10).toString(2).padStart(8, "0");
-}
-
 function calculateState(a, b, c) {
-  // Sierpinski Fractal Triangle. Rule 182
-  // let ruleSet = chooseRuleSet(182)
-  // Textile Cone Snail Shell. Rule 110.
-  let ruleSet = chooseRuleSet(110);
-
   let neighborhood = '' + a + b + c;
   // Subtract from 7 so '111' is the first in array, b '000' is the last.
   let value = 7 - parseInt(neighborhood, 2);
