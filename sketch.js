@@ -3,7 +3,7 @@ let cells = [];
 let history = [];
 let ruleSet;
 let w = 4;
-let ruleCollection = [1, 9, 30, 45, 58, 60, 69, 105, 110, 129, 169, 182, 195, 219];
+let ruleCollection = [9, 30, 45, 58, 60, 69, 105, 110, 129, 169, 182, 195, 219, 225];
 
 
 function chooseRuleSet(n) {
@@ -28,6 +28,8 @@ function draw() {
   // Rule-change logic. After ~100 generations.
   if (random(1) < 0.01) {
     ruleSet = chooseRuleSet(random(ruleCollection));
+    // Must return to elementary position to prevent "voiding out".
+    cells[floor(cells.length/2)] = 1;
   }
 
   // Infinite Scroll logic.
