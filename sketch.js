@@ -1,10 +1,13 @@
 let cells = [];
+// This is our "window" of cells.
+let history = [];
 let w = 4;
-let y = 0;
+
+let ruleCollection = [1, 9, 30, 45, 58, 60, 69, 105, 110, 129, 169, 182, 195, 219]
 
 function setup() {
   // We want an odd # of cells.
-  createCanvas(710, 1800);
+  createCanvas(710, 500);
   background(220);
   let total = width / w;
   for (let i = 0; i < total; i++) {
@@ -14,17 +17,34 @@ function setup() {
 }
 
 function draw() {
-  for (let i = 0; i < cells.length; i++) {
-    let x = i * w;
-    noStroke();
-    // 1 is Black. 0 is White.
-    fill(255 - cells[i] * 255);
-    square(x, y, w);
-  }
-  // Go to next row.
-  y += w;
+  history.push(cells);
 
-  
+  // Rule-change logic here.
+
+  // Infinite Scroll logic.
+  let rows = height/w;
+  if (history.length > rows + 1) {
+    // Pop from front of array once we fill up screen.
+    history.splice(0, 1);
+  }
+
+  // Drawing logic.
+  let y = 0;
+  background(255);
+  for(let cells of history) {
+    for (let i = 0; i < cells.length; i++) {
+      let x = i * w;
+      if (cells[i] == 1) {
+        noStroke();
+        // 1 is Black. 0 is White.
+        fill(255 - cells[i] * 255);
+        square(x, y - w, w);
+      }
+    }
+    y += w;
+  }
+
+  // Next-generation logic.
   let nextCells = [];
   for (let i = 0; i < cells.length; i++) {
     // Wrap-around by modding & adding size of array
@@ -46,6 +66,7 @@ function chooseRuleSet(n) {
 function calculateState(a, b, c) {
   // Sierpinski Fractal Triangle. Rule 182
   // let ruleSet = chooseRuleSet(182)
+  // Textile Cone Snail Shell. Rule 110.
   let ruleSet = chooseRuleSet(110);
 
   let neighborhood = '' + a + b + c;

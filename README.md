@@ -4,6 +4,10 @@ https://cgregori.github.io/cellular_automata/
 ## Examples
 ![image](https://github.com/cgregori/cellular_automata/assets/43585807/3e83a67f-2646-4617-9306-c9e7b5ad0dc0)
 
+---
+My favorite rules:
+  - 182 (Sierpinski's Triangle)
+  - 110 (Textile Cone Snail Shell)
 
 ---
 
