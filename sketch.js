@@ -1,5 +1,5 @@
 let cells = []
-let w = 5;
+let w = 2;
 let y = 0;
 
 function setup() {
