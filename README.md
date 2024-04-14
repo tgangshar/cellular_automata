@@ -2,6 +2,8 @@
 https://cgregori.github.io/cellular_automata/
 
 ## Examples
+![bw_cellular_automata](https://github.com/cgregori/cellular_automata/assets/43585807/ff576d79-4274-4256-bfa2-6598d201319f)
+
 ![image](https://github.com/cgregori/cellular_automata/assets/43585807/3e83a67f-2646-4617-9306-c9e7b5ad0dc0)
 
 ---
