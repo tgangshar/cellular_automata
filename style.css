@@ -3,7 +3,9 @@ html, body {
   padding: 0;
   background-image: url(‘IMG_0752.JPG’);
   background-repeat: no-repeat;
-  color: #FFFFFF;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #0000;
 }
 
 canvas {
